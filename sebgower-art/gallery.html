@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-NZ">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Work · Seb Gower Art</title>
+    <meta name="description" content="The wall — originals by Seb Gower. Search, filter, save, open full screen." />
+    <meta name="theme-color" content="#0b0b0b" />
+    <link rel="icon" href="assets/splat.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
+
+    <header class="nav is-solid">
+      <a class="brand" href="index.html">
+        <svg viewBox="0 0 200 80" aria-hidden="true" focusable="false">
+          <path
+            d="M14 22c8-14 30-9 44-14 16-6 30 2 46-2 18-4 34-6 50 0 14 5 34 2 40 16 5 12-4 18-2 28 3 12 4 22-10 26-14 4-28-2-44 2-18 4-36 2-54 0-16-2-34 6-48-2C20 72 6 64 8 52 9 42 2 38 14 22z"
+          />
+          <circle cx="192" cy="10" r="5" />
+          <circle cx="6" cy="72" r="4" />
+          <circle cx="182" cy="74" r="3" />
+        </svg>
+        <span>Seb Gower</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="gallery.html" aria-current="page">Work</a></li>
+        <li><a href="commission.html">Commission</a></li>
+        <li><a href="index.html#studio">Live</a></li>
+        <li>
+          <a href="https://shop.sebgowerart.com/" target="_blank" rel="noopener">Shop</a>
+        </li>
+      </ul>
+      <a class="nav-cta" href="commission.html">Start a painting</a>
+      <button class="menu-btn" type="button" data-open-menu aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </header>
+
+    <div class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-panel" role="dialog" aria-label="Menu">
+        <div class="drawer-top">
+          <strong>Seb Gower</strong>
+          <button class="drawer-close" type="button" data-close-menu aria-label="Close">×</button>
+        </div>
+        <nav>
+          <a href="gallery.html">Work</a>
+          <a href="commission.html">Commission</a>
+          <a href="index.html#studio">Live</a>
+          <a href="https://shop.sebgowerart.com/" target="_blank" rel="noopener">Shop</a>
+        </nav>
+      </div>
+    </div>
+
+    <main id="main" class="page">
+      <header class="page-hero">
+        <h1>The good stuff. All painted loud.</h1>
+        <p>
+          Originals from the road — faces, rivers, harbours and thick colour. Search, filter by mood, save
+          favourites, open anything full screen.
+        </p>
+      </header>
+
+      <div class="toolbar">
+        <input type="search" data-search placeholder="Search title, place, vibe…" aria-label="Search works" />
+        <select data-mood aria-label="Filter by mood">
+          <option value="all">All moods</option>
+          <option value="landscape">Landscape</option>
+          <option value="portrait">Portrait</option>
+          <option value="figure">Figure</option>
+          <option value="still-life">Still life</option>
+          <option value="harbour">Harbour</option>
+        </select>
+        <div class="chip-row" data-chips aria-label="Filter by place"></div>
+      </div>
+
+      <div class="masonry" data-masonry></div>
+      <p class="empty" data-empty hidden>Nothing on this wall matches. Loosen the filters.</p>
+    </main>
+
+    <footer>
+      <div>© Seb Gower Art</div>
+      <a href="commission.html">Commission an original →</a>
+    </footer>
+
+    <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Painting viewer">
+      <div class="lb-top">
+        <strong data-lb-title></strong>
+        <button class="icon" type="button" data-lb-close aria-label="Close">×</button>
+      </div>
+      <div class="lb-stage"><img alt="" /></div>
+      <div class="lb-cap">
+        <span data-lb-place></span>
+        <span>← → · Esc</span>
+      </div>
+      <button class="lb-nav prev" type="button" data-lb-prev aria-label="Previous">‹</button>
+      <button class="lb-nav next" type="button" data-lb-next aria-label="Next">›</button>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

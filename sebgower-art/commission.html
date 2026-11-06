@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en-NZ">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Commission · Seb Gower Art</title>
+    <meta
+      name="description"
+      content="Commission an original oil painting from Seb Gower. Pick a vibe, size, and story — the studio replies."
+    />
+    <meta name="theme-color" content="#0b0b0b" />
+    <link rel="icon" href="assets/splat.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
+
+    <header class="nav is-solid">
+      <a class="brand" href="index.html">
+        <svg viewBox="0 0 200 80" aria-hidden="true" focusable="false">
+          <path
+            d="M14 22c8-14 30-9 44-14 16-6 30 2 46-2 18-4 34-6 50 0 14 5 34 2 40 16 5 12-4 18-2 28 3 12 4 22-10 26-14 4-28-2-44 2-18 4-36 2-54 0-16-2-34 6-48-2C20 72 6 64 8 52 9 42 2 38 14 22z"
+          />
+          <circle cx="192" cy="10" r="5" />
+          <circle cx="6" cy="72" r="4" />
+          <circle cx="182" cy="74" r="3" />
+        </svg>
+        <span>Seb Gower</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="gallery.html">Work</a></li>
+        <li><a href="commission.html" aria-current="page">Commission</a></li>
+        <li><a href="index.html#studio">Live</a></li>
+        <li>
+          <a href="https://shop.sebgowerart.com/" target="_blank" rel="noopener">Shop</a>
+        </li>
+      </ul>
+      <a class="nav-cta" href="mailto:seb@sebgowerart.com">Email Seb</a>
+      <button class="menu-btn" type="button" data-open-menu aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </header>
+
+    <div class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-panel" role="dialog" aria-label="Menu">
+        <div class="drawer-top">
+          <strong>Seb Gower</strong>
+          <button class="drawer-close" type="button" data-close-menu aria-label="Close">×</button>
+        </div>
+        <nav>
+          <a href="gallery.html">Work</a>
+          <a href="commission.html">Commission</a>
+          <a href="index.html#studio">Live</a>
+          <a href="https://shop.sebgowerart.com/" target="_blank" rel="noopener">Shop</a>
+        </nav>
+      </div>
+    </div>
+
+    <main id="main" class="page">
+      <header class="page-hero">
+        <h1>Paint goes where you point it.</h1>
+        <p>
+          Tell the studio what you want on the wall. Pick a painting that already hits the feeling, choose a
+          size, write the story. Seb replies with a path forward.
+        </p>
+      </header>
+
+      <div class="form-shell">
+        <aside>
+          <img
+            src="assets/art/imagine.webp"
+            alt="Imagine, oil painting by Seb Gower"
+            style="width: 100%; height: min(70vh, 36rem); object-fit: cover"
+          />
+          <p style="color: var(--mute); margin: 0.9rem 0 0; font-size: 0.95rem">
+            Collectors already hang the work in NZ, AU, the US, Europe and beyond. Mistakes welcome —
+            “I would leave the error there. It's a happy little mistake.”
+          </p>
+        </aside>
+
+        <form class="form-card" data-commission novalidate>
+          <h2>Commission brief</h2>
+          <p>Opens your email app with everything filled in — nothing is stored on this page.</p>
+
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" autocomplete="name" required />
+            <div class="err" data-err="name"></div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+            <div class="err" data-err="email"></div>
+          </div>
+
+          <div class="field">
+            <span>Closest vibe</span>
+            <div class="pick-grid" data-pick></div>
+          </div>
+
+          <div class="field">
+            <label for="size">Size</label>
+            <select id="size" name="size">
+              <option value="small">Small — under ~60cm</option>
+              <option value="medium" selected>Medium — statement piece</option>
+              <option value="large">Large — wall commander</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="brief">The story</label>
+            <textarea
+              id="brief"
+              name="brief"
+              rows="5"
+              placeholder="Who is it for? What should it feel like when you walk into the room?"
+              required
+            ></textarea>
+            <div class="err" data-err="brief"></div>
+          </div>
+
+          <div class="estimate" data-estimate></div>
+
+          <div class="btn-row" style="margin-top: 1.2rem">
+            <button class="btn hot" type="submit">Send to the studio</button>
+            <a class="btn" href="gallery.html">Keep looking</a>
+          </div>
+
+          <div class="success" data-success>
+            Brief packed. If your mail app didn't open, write Seb at
+            <a href="mailto:seb@sebgowerart.com">seb@sebgowerart.com</a>.
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <div>Studio enquiries: <a href="mailto:seb@sebgowerart.com">seb@sebgowerart.com</a></div>
+      <a href="https://shop.sebgowerart.com/" target="_blank" rel="noopener">Shop the prints →</a>
+    </footer>
+
+    <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Painting viewer">
+      <div class="lb-top">
+        <strong data-lb-title></strong>
+        <button class="icon" type="button" data-lb-close aria-label="Close">×</button>
+      </div>
+      <div class="lb-stage"><img alt="" /></div>
+      <div class="lb-cap">
+        <span data-lb-place></span>
+        <span>← → · Esc</span>
+      </div>
+      <button class="lb-nav prev" type="button" data-lb-prev aria-label="Previous">‹</button>
+      <button class="lb-nav next" type="button" data-lb-next aria-label="Next">›</button>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
