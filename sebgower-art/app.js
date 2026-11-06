@@ -1,4 +1,4 @@
-/* Seb Gower Art — shared interactions */
+/* Seb Gower Art — studio interactions */
 (() => {
   const WORKS = [
     {
@@ -75,26 +75,27 @@
     },
   ];
 
-  const QUOTES = [
-    {
-      text: "Imagine being a kid with full control over the fun.",
-      src: "Seb, live on stream",
-    },
-    {
-      text: "I love the wildness that paint brings. It's primal.",
-      src: "Seb, live on stream",
-    },
-    {
-      text: "It's about the energy and life behind the brush strokes.",
-      src: "Seb, live on stream",
-    },
-    {
-      text: "Ultramarine has very little chill. It's a real power whack.",
-      src: "Seb, live",
-    },
+  const CLIPS = [
+    { src: "assets/clips/0.mp4", poster: "assets/clips/0.jpg", label: "Seb painting live, moment 1" },
+    { src: "assets/clips/1.mp4", poster: "assets/clips/1.jpg", label: "Seb painting live, moment 2" },
+    { src: "assets/clips/2.mp4", poster: "assets/clips/2.jpg", label: "Seb painting live, moment 3" },
+    { src: "assets/clips/3.mp4", poster: "assets/clips/3.jpg", label: "Seb painting live, moment 4" },
   ];
 
-  window.SG = { WORKS, QUOTES };
+  const SPLAT =
+    '<svg class="splat" viewBox="0 0 200 80" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14 22c8-14 30-9 44-14 16-6 30 2 46-2 18-4 34-6 50 0 14 5 34 2 40 16 5 12-4 18-2 28 3 12 4 22-10 26-14 4-28-2-44 2-18 4-36 2-54 0-16-2-34 6-48-2C20 72 6 64 8 52 9 42 2 38 14 22z"/><circle cx="192" cy="10" r="5" fill="currentColor"/><circle cx="6" cy="72" r="4" fill="currentColor"/><circle cx="182" cy="74" r="3" fill="currentColor"/></svg>';
+
+  window.SG = {
+    WORKS,
+    setRoom(room, btn) {
+      const shell = document.querySelector("[data-gallery-shell]");
+      if (!shell || !room) return;
+      shell.setAttribute("data-room", room);
+      document.querySelectorAll("[data-room-mode]").forEach((b) => {
+        b.setAttribute("aria-pressed", b === btn || b.getAttribute("data-room-mode") === room ? "true" : "false");
+      });
+    },
+  };
 
   const favKey = "sg-favs";
   const readFavs = () => {
@@ -108,54 +109,45 @@
 
   /* Nav / drawer */
   const drawer = document.getElementById("drawer");
-  const openBtn = document.querySelector("[data-open-menu]");
-  const closeBtn = document.querySelector("[data-close-menu]");
   const setDrawer = (open) => {
     if (!drawer) return;
     drawer.classList.toggle("open", open);
     drawer.setAttribute("aria-hidden", open ? "false" : "true");
     document.body.style.overflow = open ? "hidden" : "";
   };
-  openBtn?.addEventListener("click", () => setDrawer(true));
-  closeBtn?.addEventListener("click", () => setDrawer(false));
+  document.querySelector("[data-open-menu]")?.addEventListener("click", () => setDrawer(true));
+  document.querySelector("[data-close-menu]")?.addEventListener("click", () => setDrawer(false));
   drawer?.addEventListener("click", (e) => {
     if (e.target === drawer) setDrawer(false);
   });
 
-  /* Solid nav after hero */
   const nav = document.querySelector(".nav");
   const onScrollNav = () => {
     if (!nav) return;
-    nav.classList.toggle("is-solid", window.scrollY > window.innerHeight * 0.7);
+    nav.classList.toggle("is-solid", window.scrollY > window.innerHeight * 0.55);
   };
   window.addEventListener("scroll", onScrollNav, { passive: true });
   onScrollNav();
 
-  /* Progress */
   const bar = document.querySelector(".progress");
   const onProgress = () => {
     if (!bar) return;
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    const p = max > 0 ? (window.scrollY / max) * 100 : 0;
-    bar.style.width = `${p}%`;
+    bar.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
   };
   window.addEventListener("scroll", onProgress, { passive: true });
   onProgress();
 
-  /* Panel in-view */
-  const panels = document.querySelectorAll(".panel, .studio, .wall, .closeout");
-  if (panels.length && "IntersectionObserver" in window) {
+  /* In-view rooms */
+  const rooms = document.querySelectorAll(".room, .reel, .wall, .feed, .smash, .closeout, .anywhere");
+  if (rooms.length && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((en) => {
-          if (en.isIntersecting) en.target.classList.add("is-in");
-        });
-      },
-      { threshold: 0.45 }
+      (entries) => entries.forEach((en) => en.isIntersecting && en.target.classList.add("is-in")),
+      { threshold: 0.35 }
     );
-    panels.forEach((p) => io.observe(p));
+    rooms.forEach((p) => io.observe(p));
   } else {
-    panels.forEach((p) => p.classList.add("is-in"));
+    rooms.forEach((p) => p.classList.add("is-in"));
   }
 
   /* Lightbox */
@@ -183,7 +175,6 @@
     document.body.style.overflow = "";
   };
   const stepLb = (dir) => openLb(lbList, lbIndex + dir);
-
   lb?.querySelector("[data-lb-close]")?.addEventListener("click", closeLb);
   lb?.querySelector("[data-lb-prev]")?.addEventListener("click", () => stepLb(-1));
   lb?.querySelector("[data-lb-next]")?.addEventListener("click", () => stepLb(1));
@@ -193,11 +184,7 @@
     if (e.key === "ArrowRight") stepLb(1);
     if (e.key === "ArrowLeft") stepLb(-1);
   });
-
   window.SG.openLightbox = openLb;
-  window.SG.closeLightbox = closeLb;
-  window.SG.readFavs = readFavs;
-  window.SG.writeFavs = writeFavs;
   window.SG.toggleFav = (id) => {
     const s = readFavs();
     if (s.has(id)) s.delete(id);
@@ -206,76 +193,259 @@
     return s.has(id);
   };
 
-  /* Home: studio quotes + clips */
-  const stage = document.querySelector("[data-studio-stage]");
-  if (stage) {
-    const imgs = [...stage.querySelectorAll("img")];
-    const quoteEl = document.querySelector("[data-quote]");
-    const citeEl = document.querySelector("[data-cite]");
-    const dots = document.querySelector("[data-dots]");
+  document.querySelectorAll("[data-open-work]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-open-work");
+      const idx = WORKS.findIndex((w) => w.id === id);
+      if (idx >= 0) openLb(WORKS, idx);
+    });
+  });
+
+  /* Hero reel */
+  const reel = document.querySelector("[data-reel]");
+  if (reel) {
+    const video = reel.querySelector(".reel-video");
+    const poster = reel.querySelector(".reel-poster");
+    const dots = reel.querySelector("[data-reel-dots]");
+    const playBtn = reel.querySelector("[data-reel-play]");
+    const muteBtn = reel.querySelector("[data-reel-mute]");
     let i = 0;
-    const show = (n) => {
-      i = (n + imgs.length) % imgs.length;
-      imgs.forEach((img, idx) => img.classList.toggle("on", idx === i));
+    let playing = false;
+
+    CLIPS.forEach((c, idx) => {
+      const li = document.createElement("li");
+      const b = document.createElement("button");
+      b.type = "button";
+      b.innerHTML = SPLAT;
+      b.setAttribute("aria-label", c.label);
+      if (idx === 0) b.setAttribute("aria-current", "true");
+      b.addEventListener("click", () => show(idx, playing));
+      li.appendChild(b);
+      dots?.appendChild(li);
+    });
+
+    const show = (n, autoplay) => {
+      i = (n + CLIPS.length) % CLIPS.length;
+      const c = CLIPS[i];
+      reel.style.setProperty("--poster", `url(${c.poster})`);
+      if (poster) poster.src = c.poster;
+      if (video) {
+        video.poster = c.poster;
+        video.src = c.src;
+        video.load();
+        if (autoplay) video.play().catch(() => {});
+      }
       dots?.querySelectorAll("button").forEach((b, idx) => {
         b.setAttribute("aria-current", idx === i ? "true" : "false");
       });
-      const q = QUOTES[i % QUOTES.length];
-      if (quoteEl) quoteEl.textContent = `“${q.text}”`;
-      if (citeEl) citeEl.textContent = q.src;
     };
-    dots?.addEventListener("click", (e) => {
-      const btn = e.target.closest("button");
-      if (!btn) return;
-      show(+btn.dataset.i);
+
+    playBtn?.addEventListener("click", async () => {
+      if (!video) return;
+      if (video.paused) {
+        try {
+          await video.play();
+          playing = true;
+          playBtn.textContent = "Pause";
+          playBtn.setAttribute("aria-pressed", "true");
+        } catch {
+          /* autoplay blocked */
+        }
+      } else {
+        video.pause();
+        playing = false;
+        playBtn.textContent = "Play";
+        playBtn.setAttribute("aria-pressed", "false");
+      }
     });
-    show(0);
-    setInterval(() => show(i + 1), 4500);
+
+    muteBtn?.addEventListener("click", () => {
+      if (!video) return;
+      video.muted = !video.muted;
+      muteBtn.textContent = video.muted ? "Unmute" : "Mute";
+      muteBtn.setAttribute("aria-pressed", video.muted ? "true" : "false");
+    });
+
+    video?.addEventListener("ended", () => show(i + 1, true));
+    show(0, false);
   }
 
-  /* Home: flick stack */
+  /* Stroke-by-stroke Imagine */
+  const build = document.querySelector("[data-build]");
+  if (build) {
+    const group = build.querySelector("[data-stroke-group]");
+    const countEl = build.querySelector("[data-build-count]");
+    fetch("assets/strokes.json")
+      .then((r) => r.json())
+      .then((strokes) => {
+        strokes.forEach((s) => {
+          const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          p.setAttribute("d", s.d);
+          p.setAttribute("stroke", "#fff");
+          p.setAttribute("stroke-width", String(s.w));
+          p.setAttribute("stroke-linecap", "round");
+          p.setAttribute("fill", "none");
+          p.setAttribute("transform", s.t);
+          p.style.opacity = "0";
+          p.style.transition = "opacity .28s linear";
+          group?.appendChild(p);
+        });
+        const paths = [...(group?.querySelectorAll("path") || [])];
+        const onScroll = () => {
+          const rect = build.getBoundingClientRect();
+          const total = build.offsetHeight - window.innerHeight;
+          const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+          const t = scrolled / Math.max(total, 1);
+          const n = Math.round(t * paths.length);
+          paths.forEach((p, idx) => {
+            p.style.opacity = idx < n ? "1" : "0";
+          });
+          if (countEl) countEl.textContent = `${n} / ${paths.length} strokes`;
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })
+      .catch(() => {
+        if (countEl) countEl.textContent = "Stroke data unavailable";
+      });
+  }
+
+  /* Feed cards — play when visible */
+  document.querySelectorAll("[data-feed] video").forEach((v) => {
+    if (!("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        });
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(v);
+  });
+
+  /* Stack */
   const stack = document.querySelector("[data-stack]");
   if (stack) {
-    const cards = WORKS.slice(0, 6).map((w, idx) => {
+    WORKS.slice(0, 6).forEach((w, idx) => {
       const el = document.createElement("button");
       el.type = "button";
       el.className = "stack-card";
       el.style.setProperty("--r", `${(idx - 2.5) * 4}deg`);
       el.style.zIndex = String(10 - idx);
       el.innerHTML = `<img src="${w.thumb}" alt=""><figcaption>${w.title}</figcaption>`;
-      el.addEventListener("click", () => openLb(WORKS, WORKS.indexOf(w)));
-      stack.appendChild(el);
-      return { el, w, x: 0, y: 0 };
-    });
-
-    cards.forEach((card, idx) => {
+      let x = 0;
+      let y = 0;
       let dragging = false;
       let ox = 0;
       let oy = 0;
-      const down = (e) => {
+      let moved = false;
+      el.addEventListener("pointerdown", (e) => {
         dragging = true;
-        card.el.style.zIndex = "40";
-        const pt = e.touches ? e.touches[0] : e;
-        ox = pt.clientX - card.x;
-        oy = pt.clientY - card.y;
-      };
-      const move = (e) => {
+        moved = false;
+        el.style.zIndex = "40";
+        el.setPointerCapture?.(e.pointerId);
+        ox = e.clientX - x;
+        oy = e.clientY - y;
+      });
+      el.addEventListener("pointermove", (e) => {
         if (!dragging) return;
-        const pt = e.touches ? e.touches[0] : e;
-        card.x = pt.clientX - ox;
-        card.y = pt.clientY - oy;
-        card.el.style.transform = `translate(calc(-50% + ${card.x}px), calc(-50% + ${card.y}px)) rotate(${(idx - 2.5) * 4}deg)`;
-      };
-      const up = () => {
+        moved = true;
+        x = e.clientX - ox;
+        y = e.clientY - oy;
+        el.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) rotate(${(idx - 2.5) * 4}deg)`;
+      });
+      el.addEventListener("pointerup", () => {
         dragging = false;
-      };
-      card.el.addEventListener("pointerdown", down);
-      window.addEventListener("pointermove", move);
-      window.addEventListener("pointerup", up);
+        if (!moved) openLb(WORKS, WORKS.indexOf(w));
+      });
+      stack.appendChild(el);
     });
   }
 
-  /* Gallery page */
+  /* Smash puzzle */
+  const puzzle = document.querySelector("[data-puzzle]");
+  if (puzzle) {
+    const status = document.querySelector("[data-puzzle-status]");
+    const size = 4;
+    let order = [];
+    let start = 0;
+
+    /* Click-to-swap puzzle: select one tile, swap with next click */
+    let selected = null;
+    const bind = () => {
+      puzzle.querySelectorAll("button").forEach((b) => {
+        b.addEventListener("click", () => {
+          if (selected === null) {
+            selected = +b.dataset.slot;
+            b.style.outline = "2px solid #d4005a";
+            return;
+          }
+          const a = selected;
+          const c = +b.dataset.slot;
+          selected = null;
+          [order[a], order[c]] = [order[c], order[a]];
+          paint();
+          check();
+        });
+      });
+    };
+
+    const paint = () => {
+      puzzle.innerHTML = "";
+      order.forEach((pos, i) => {
+        const r = Math.floor(pos / size);
+        const c = pos % size;
+        const b = document.createElement("button");
+        b.type = "button";
+        b.style.backgroundPosition = `${(c / (size - 1)) * 100}% ${(r / (size - 1)) * 100}%`;
+        b.dataset.slot = String(i);
+        if (pos === i) b.classList.add("correct");
+        puzzle.appendChild(b);
+      });
+      bind();
+    };
+
+    const check = () => {
+      const done = order.every((v, i) => v === i);
+      const secs = ((Date.now() - start) / 1000).toFixed(1);
+      if (status) {
+        status.textContent = done ? `Rebuilt in ${secs}s. Brag away.` : `${order.filter((v, i) => v === i).length}/16 locked`;
+      }
+      if (done) puzzle.querySelectorAll("button").forEach((b) => b.classList.add("correct"));
+    };
+
+    const shuffle = () => {
+      order = [...Array(size * size).keys()];
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      selected = null;
+      start = Date.now();
+      paint();
+      if (status) status.textContent = "16 tiles · go";
+    };
+
+    document.querySelector("[data-puzzle-shuffle]")?.addEventListener("click", shuffle);
+    shuffle();
+  }
+
+  /* Gallery room atmospheres — bind even before masonry renders */
+  const shell = document.querySelector("[data-gallery-shell]");
+  document.querySelectorAll("[data-room-mode]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const room = btn.getAttribute("data-room-mode");
+      if (!room || !shell) return;
+      shell.setAttribute("data-room", room);
+      document.querySelectorAll("[data-room-mode]").forEach((b) => {
+        b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+      });
+    });
+  });
+
+  /* Gallery */
   const masonry = document.querySelector("[data-masonry]");
   if (masonry) {
     const search = document.querySelector("[data-search]");
@@ -286,8 +456,7 @@
     let filterPlace = "all";
     let q = "";
 
-    const places = [...new Set(WORKS.map((w) => w.place))];
-    places.forEach((p) => {
+    [...new Set(WORKS.map((w) => w.place))].forEach((p) => {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "chip";
@@ -314,7 +483,6 @@
       masonry.innerHTML = "";
       if (empty) empty.hidden = list.length > 0;
       list.forEach((w) => {
-        const idx = WORKS.indexOf(w);
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "tile";
@@ -351,7 +519,7 @@
     render();
   }
 
-  /* Commission form */
+  /* Commission */
   const form = document.querySelector("[data-commission]");
   if (form) {
     const pick = form.querySelector("[data-pick]");
@@ -359,7 +527,6 @@
     const estimate = form.querySelector("[data-estimate]");
     const success = form.querySelector("[data-success]");
     let selected = "imagine";
-
     const params = new URLSearchParams(location.search);
     if (params.get("work") && WORKS.some((w) => w.id === params.get("work"))) {
       selected = params.get("work");
@@ -382,16 +549,12 @@
       pick?.appendChild(b);
     });
 
-    const weeksFor = (s) => {
-      if (s === "small") return 3;
-      if (s === "medium") return 5;
-      return 8;
-    };
+    const weeksFor = (s) => (s === "small" ? 3 : s === "medium" ? 5 : 8);
     const updateEstimate = () => {
       const w = WORKS.find((x) => x.id === selected);
       const weeks = weeksFor(size.value);
       if (estimate) {
-        estimate.innerHTML = `Inspired by <strong>${w?.title || "your pick"}</strong>. Rough studio window: <strong>${weeks}–${weeks + 2} weeks</strong> from deposit. Exact quote after we talk.`;
+        estimate.innerHTML = `Closest vibe: <strong>${w?.title || "your pick"}</strong>. Rough studio window: <strong>${weeks}–${weeks + 2} weeks</strong> from deposit. Exact quote after we talk.`;
       }
     };
     size?.addEventListener("change", updateEstimate);

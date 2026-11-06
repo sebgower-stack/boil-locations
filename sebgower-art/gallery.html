@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Work · Seb Gower Art</title>
-    <meta name="description" content="The wall — originals by Seb Gower. Search, filter, save, open full screen." />
+    <meta
+      name="description"
+      content="The good stuff. All painted loud. Originals by Seb Gower — change the room, search, save, open full screen."
+    />
     <meta name="theme-color" content="#0b0b0b" />
     <link rel="icon" href="assets/splat.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=2" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -63,33 +66,64 @@
     </div>
 
     <main id="main" class="page">
-      <header class="page-hero">
-        <h1>The good stuff. All painted loud.</h1>
-        <p>
-          Originals from the road — faces, rivers, harbours and thick colour. Search, filter by mood, save
-          favourites, open anything full screen.
-        </p>
-      </header>
+      <div class="gallery-shell" data-gallery-shell data-room="vault">
+        <header class="page-hero">
+          <h1>The good stuff. All painted loud.</h1>
+          <p>
+            Originals from the road — faces, rivers, harbours and thick colour. Pick the air around the work.
+            The painting stays the same — the night changes.
+          </p>
+        </header>
 
-      <div class="toolbar">
-        <input type="search" data-search placeholder="Search title, place, vibe…" aria-label="Search works" />
-        <select data-mood aria-label="Filter by mood">
-          <option value="all">All moods</option>
-          <option value="landscape">Landscape</option>
-          <option value="portrait">Portrait</option>
-          <option value="figure">Figure</option>
-          <option value="still-life">Still life</option>
-          <option value="harbour">Harbour</option>
-        </select>
-        <div class="chip-row" data-chips aria-label="Filter by place"></div>
+        <div class="room-modes" role="group" aria-label="Room atmosphere">
+          <button type="button" data-room-mode="vault" aria-pressed="true">Night Vault</button>
+          <button type="button" data-room-mode="cube" aria-pressed="false">White Cube</button>
+          <button type="button" data-room-mode="salon" aria-pressed="false">Gold Salon</button>
+          <button type="button" data-room-mode="fog" aria-pressed="false">Fog Coast</button>
+          <button type="button" data-room-mode="studio" aria-pressed="false">Studio Hour</button>
+          <button type="button" data-room-mode="rose" aria-pressed="false">Rose Night</button>
+        </div>
+        <script>
+          (function () {
+            var shell = document.querySelector("[data-gallery-shell]");
+            document.querySelectorAll("[data-room-mode]").forEach(function (btn) {
+              btn.addEventListener("click", function () {
+                var room = btn.getAttribute("data-room-mode");
+                if (!shell || !room) return;
+                shell.setAttribute("data-room", room);
+                document.querySelectorAll("[data-room-mode]").forEach(function (b) {
+                  b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+                });
+              });
+            });
+          })();
+        </script>
+
+        <div class="toolbar">
+          <input
+            type="search"
+            data-search
+            placeholder="Search title, place, vibe…"
+            aria-label="Search works"
+          />
+          <select data-mood aria-label="Filter by mood">
+            <option value="all">All moods</option>
+            <option value="landscape">Landscape</option>
+            <option value="portrait">Portrait</option>
+            <option value="figure">Figure</option>
+            <option value="still-life">Still life</option>
+            <option value="harbour">Harbour</option>
+          </select>
+          <div class="chip-row" data-chips aria-label="Filter by place"></div>
+        </div>
+
+        <div class="masonry" data-masonry></div>
+        <p class="empty" data-empty hidden>Nothing on this wall matches. Loosen the filters.</p>
       </div>
-
-      <div class="masonry" data-masonry></div>
-      <p class="empty" data-empty hidden>Nothing on this wall matches. Loosen the filters.</p>
     </main>
 
     <footer>
-      <div>© Seb Gower Art</div>
+      <div>© Seb Gower Art · Paint loud. Paint love.</div>
       <a href="commission.html">Commission an original →</a>
     </footer>
 
@@ -107,6 +141,6 @@
       <button class="lb-nav next" type="button" data-lb-next aria-label="Next">›</button>
     </div>
 
-    <script src="app.js" defer></script>
+    <script src="app.js?v=2" defer></script>
   </body>
 </html>
