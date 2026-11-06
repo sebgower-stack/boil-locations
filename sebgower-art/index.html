@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en-NZ" class="snap">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Seb Gower | Art and Painting</title>
+    <meta
+      name="description"
+      content="Oil paintings by Seb Gower. Commissions, live painting replays and loud colour from the studio."
+    />
+    <meta name="theme-color" content="#0b0b0b" />
+    <link rel="icon" href="assets/splat.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
+
+    <header class="nav">
+      <a class="brand" href="index.html" aria-label="Seb Gower home">
+        <svg viewBox="0 0 200 80" aria-hidden="true" focusable="false">
+          <path
+            d="M14 22c8-14 30-9 44-14 16-6 30 2 46-2 18-4 34-6 50 0 14 5 34 2 40 16 5 12-4 18-2 28 3 12 4 22-10 26-14 4-28-2-44 2-18 4-36 2-54 0-16-2-34 6-48-2C20 72 6 64 8 52 9 42 2 38 14 22z"
+          />
+          <circle cx="192" cy="10" r="5" />
+          <circle cx="6" cy="72" r="4" />
+          <circle cx="182" cy="74" r="3" />
+        </svg>
+        <span>Seb Gower</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="gallery.html">Work</a></li>
+        <li><a href="commission.html">Commission</a></li>
+        <li><a href="#studio">Live</a></li>
+        <li>
+          <a href="https://shop.sebgowerart.com/?utm_source=sebgowerart&utm_medium=referral&utm_campaign=home" target="_blank" rel="noopener">Shop</a>
+        </li>
+      </ul>
+      <a class="nav-cta" href="commission.html">Start a painting</a>
+      <button class="menu-btn" type="button" data-open-menu aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </header>
+
+    <div class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-panel" role="dialog" aria-label="Menu">
+        <div class="drawer-top">
+          <strong>Seb Gower</strong>
+          <button class="drawer-close" type="button" data-close-menu aria-label="Close">×</button>
+        </div>
+        <nav>
+          <a href="gallery.html">Work</a>
+          <a href="commission.html">Commission</a>
+          <a href="#studio">Live</a>
+          <a href="https://shop.sebgowerart.com/" target="_blank" rel="noopener">Shop</a>
+          <a href="mailto:seb@sebgowerart.com">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+    <main id="main">
+      <!-- Studio reel hero — brand first -->
+      <section
+        class="reel"
+        data-reel
+        aria-labelledby="hero-brand"
+        style="--poster: url(assets/clips/0.jpg)"
+      >
+        <div class="reel-blur" aria-hidden="true"></div>
+        <div class="reel-frame">
+          <img
+            class="reel-poster"
+            src="assets/clips/0.jpg"
+            alt=""
+            width="480"
+            height="854"
+            fetchpriority="high"
+          />
+          <video
+            class="reel-video"
+            src="assets/clips/0.mp4"
+            poster="assets/clips/0.jpg"
+            muted
+            playsinline
+            preload="auto"
+            aria-hidden="true"
+          ></video>
+        </div>
+        <div class="reel-shade"></div>
+        <div class="reel-copy">
+          <h1 class="hero-brand" id="hero-brand"><span>Seb</span><span>Gower</span></h1>
+          <p class="hero-tag">Whatever you are, be a good one</p>
+          <div class="btn-row" style="justify-content: center">
+            <a class="btn fill" href="#wall">Get messy</a>
+            <a class="btn" href="#paintings">The paintings</a>
+          </div>
+        </div>
+        <div class="reel-ctrl" role="group" aria-label="Video controls">
+          <button type="button" data-reel-play aria-pressed="false">Play</button>
+          <button type="button" data-reel-mute aria-pressed="true">Unmute</button>
+        </div>
+        <ol class="reel-dots" data-reel-dots aria-label="Studio clips"></ol>
+        <div class="scroll-cue" aria-hidden="true"><span>Keep scrolling</span><i></i></div>
+      </section>
+
+      <h2 class="sr-only" id="paintings">Paintings</h2>
+
+      <article class="room" style="--bg: #0b0f28; --acc: #d4005a" aria-labelledby="t-silver">
+        <div class="room-hold">
+          <figure class="room-art">
+            <button type="button" data-open-work="silver-lake" aria-label="Open Silver Lake full screen">
+              <img
+                src="assets/art/silver-lake.webp"
+                alt="Silver Lake, oil painting by Seb Gower: a child fishing from a lakeshore as the sun sets behind hills"
+                loading="lazy"
+                width="2392"
+                height="2400"
+              />
+            </button>
+          </figure>
+          <div class="room-copy">
+            <p class="room-kicker">Original · New Zealand</p>
+            <h3 class="room-title" id="t-silver">Silver Lake</h3>
+            <p class="room-line">A child, a lake, and the kind of dusk that refuses to hurry.</p>
+            <div class="btn-row" style="justify-content: center">
+              <a class="btn fill" href="commission.html?work=silver-lake">Commission this energy</a>
+              <button class="btn" type="button" data-open-work="silver-lake">View full</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="room" style="--bg: #16161a; --acc: #d4005a" aria-labelledby="t-worlds">
+        <div class="room-hold">
+          <figure class="room-art">
+            <button type="button" data-open-work="worlds" aria-label="Open Worlds full screen">
+              <img
+                src="assets/art/worlds.jpg"
+                alt="Worlds, oil painting by Seb Gower"
+                loading="lazy"
+                width="1920"
+                height="1438"
+              />
+            </button>
+          </figure>
+          <div class="room-copy">
+            <p class="room-kicker">Original · Travels</p>
+            <h3 class="room-title" id="t-worlds">Worlds</h3>
+            <p class="room-line">Bodies, colour, collision — the studio when the door stays open.</p>
+            <div class="btn-row" style="justify-content: center">
+              <a class="btn fill" href="commission.html?work=worlds">Commission this energy</a>
+              <button class="btn" type="button" data-open-work="worlds">View full</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="room" style="--bg: #16161a; --acc: #ffd54a" aria-labelledby="t-gorge">
+        <div class="room-hold">
+          <figure class="room-art">
+            <button type="button" data-open-work="gorge" aria-label="Open Gorge full screen">
+              <img
+                src="assets/art/gorge.jpg"
+                alt="Gorge, oil painting by Seb Gower"
+                loading="lazy"
+                width="1786"
+                height="2400"
+              />
+            </button>
+          </figure>
+          <div class="room-copy">
+            <p class="room-kicker">Original · South Island</p>
+            <h3 class="room-title" id="t-gorge">Gorge</h3>
+            <p class="room-line">Stone, water, and a magenta sky that shouldn't work — until it does.</p>
+            <div class="btn-row" style="justify-content: center">
+              <a class="btn fill" href="commission.html?work=gorge">Commission this energy</a>
+              <button class="btn" type="button" data-open-work="gorge">View full</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Imagine, stroke by stroke -->
+      <section class="build" data-build aria-labelledby="build-t">
+        <svg width="0" height="0" aria-hidden="true">
+          <defs>
+            <mask id="strokeMask" maskContentUnits="objectBoundingBox">
+              <rect width="1" height="1" fill="#000" />
+              <g data-stroke-group transform="scale(.01)"></g>
+            </mask>
+          </defs>
+        </svg>
+        <div class="build-sticky">
+          <div class="build-head">
+            <h2 id="build-t">Imagine, painted stroke by stroke as you scroll</h2>
+            <p>Keep scrolling. Each move lays another mark — the way the canvas actually happened.</p>
+          </div>
+          <div class="build-stage">
+            <img src="assets/art/imagine.webp" alt="Imagine by Seb Gower revealing stroke by stroke" />
+          </div>
+          <div class="build-count" data-build-count>0 / 46 strokes</div>
+          <blockquote class="build-quote">
+            “Ultramarine has very little chill. It's a real power whack.”
+            <cite>Seb, live. Hear it in the room.</cite>
+          </blockquote>
+        </div>
+      </section>
+
+      <section class="wall" id="wall" aria-labelledby="wall-t">
+        <div class="wall-head">
+          <h2 id="wall-t">Flick it. Toss it. Stack it.</h2>
+          <p>The studio floor looks like this anyway. Drag a painting. Tap one to open it.</p>
+        </div>
+        <div class="stack" data-stack aria-label="Interactive painting stack"></div>
+        <div class="btn-row">
+          <a class="btn fill" href="gallery.html">Open the full wall</a>
+        </div>
+      </section>
+
+      <section class="feed" id="studio" aria-labelledby="feed-t">
+        <h2 id="feed-t">Live. Loud. Unedited.</h2>
+        <div class="feed-grid" data-feed>
+          <article class="feed-card">
+            <video src="assets/clips/1.mp4" poster="assets/clips/1.jpg" muted loop playsinline preload="none"></video>
+            <div class="feed-copy">
+              <p class="feed-quote">“Imagine being a kid with full control over the fun.”</p>
+              <small>Seb, live on stream</small>
+            </div>
+          </article>
+          <article class="feed-card">
+            <video src="assets/clips/2.mp4" poster="assets/clips/2.jpg" muted loop playsinline preload="none"></video>
+            <div class="feed-copy">
+              <p class="feed-quote">“I love the wildness that paint brings. It's primal.”</p>
+              <small>Seb, live on stream</small>
+            </div>
+          </article>
+          <article class="feed-card">
+            <video src="assets/clips/3.mp4" poster="assets/clips/3.jpg" muted loop playsinline preload="none"></video>
+            <div class="feed-copy">
+              <p class="feed-quote">“It's about the energy and life behind the brush strokes.”</p>
+              <small>Seb, live on stream</small>
+            </div>
+          </article>
+        </div>
+        <div class="btn-row" style="margin-top: 1.25rem">
+          <a class="btn hot" href="https://sebgowerart.com/replays" target="_blank" rel="noopener">Watch replays</a>
+          <a class="btn" href="commission.html">Or have me paint yours</a>
+        </div>
+      </section>
+
+      <section class="anywhere" aria-labelledby="any-t">
+        <h2 id="any-t">Paint goes where I go.</h2>
+        <p>
+          Fiords, rivers, mountain tracks. I set up wherever the light is doing something, then ask where
+          painting goes next.
+        </p>
+        <ul class="any-list">
+          <li>Doubtful Sound <small>Fiordland hush</small></li>
+          <li>Milford Track <small>South Island miles</small></li>
+          <li>Zambezi <small>River at full volume</small></li>
+          <li>Varanasi <small>Ghats and colour</small></li>
+          <li>Ban Gioc <small>Waterfall light</small></li>
+        </ul>
+      </section>
+
+      <section class="smash" aria-labelledby="smash-t">
+        <h2 id="smash-t">Smash it. Rebuild it.</h2>
+        <p>Imagine, sliced into tiles. Beat the clock, then brag about it.</p>
+        <div class="puzzle" data-puzzle aria-label="Imagine puzzle"></div>
+        <div class="puzzle-bar">
+          <button class="btn" type="button" data-puzzle-shuffle>Smash again</button>
+          <output data-puzzle-status aria-live="polite">16 tiles · go</output>
+        </div>
+      </section>
+
+      <section class="closeout" aria-labelledby="close-t">
+        <div>
+          <h2 id="close-t">Your turn. Grab a brush.</h2>
+          <p>
+            Put on a replay, put on a song, and paint along. Mistakes welcome: “I would leave the error there.
+            It's a happy little mistake.”
+          </p>
+          <div class="btn-row" style="justify-content: center">
+            <a class="btn fill" href="commission.html">Start a commission</a>
+            <a
+              class="btn"
+              href="https://shop.sebgowerart.com/?utm_source=sebgowerart&utm_medium=referral&utm_campaign=home"
+              target="_blank"
+              rel="noopener"
+              >Wear the painting</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© Seb Gower Art · Paint loud. Paint love.</div>
+      <div>
+        <a href="mailto:seb@sebgowerart.com">seb@sebgowerart.com</a>
+        ·
+        <a href="https://sebgowerart.com/" target="_blank" rel="noopener">sebgowerart.com</a>
+      </div>
+    </footer>
+
+    <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Painting viewer">
+      <div class="lb-top">
+        <strong data-lb-title></strong>
+        <button class="icon" type="button" data-lb-close aria-label="Close">×</button>
+      </div>
+      <div class="lb-stage"><img alt="" /></div>
+      <div class="lb-cap">
+        <span data-lb-place></span>
+        <span>← → · Esc</span>
+      </div>
+      <button class="lb-nav prev" type="button" data-lb-prev aria-label="Previous">‹</button>
+      <button class="lb-nav next" type="button" data-lb-next aria-label="Next">›</button>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
